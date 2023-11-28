@@ -76,7 +76,7 @@ const Create = () => {
 
       // Handle success (you can redirect or show a success message if needed)
       console.log("Crud added successfully");
-      navigate("/gridview");
+      navigate("/listview");
     } catch (error) {
       toast.error("Error creating Crud");
       console.error("Error creating Crud: ", error.message);
