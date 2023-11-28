@@ -8,6 +8,7 @@ import ListView from "./Components/ListView";
 import Edit from "./Components/Edit";
 import Header from "./Common/Header";
 import TableView from "./Components/TableView";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (

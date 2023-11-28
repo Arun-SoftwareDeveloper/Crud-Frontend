@@ -1,8 +1,10 @@
-// client/src/components/Edit.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import backendApi from "../backendAPi";
 
 const Edit = () => {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const Edit = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/cruds/${id}`);
+        const response = await axios.get(`${backendApi}/cruds/${id}`);
         const { name, mobileNumber, email, location, socialMediaLink } =
           response.data;
         setName(name);
@@ -34,17 +36,19 @@ const Edit = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:5000/cruds/update/${id}`, {
+      await axios.put(`${backendApi}/cruds/update/${id}`, {
         name,
         mobileNumber,
         email,
         location,
         socialMediaLink,
       });
-      alert("crud updated!");
+
+      toast.success("Crud updated!");
       navigate("/gridview"); // Redirect to the grid view after successful update
     } catch (error) {
       console.error("Error updating crud:", error.response);
+      toast.error("Error updating Crud");
     }
   };
 
@@ -110,6 +114,7 @@ const Edit = () => {
           Update
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

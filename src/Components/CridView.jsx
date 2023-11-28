@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/GridView.css";
+import backendApi from "../backendAPi";
 
 const GridView = () => {
   const [cruds, setCruds] = useState([]);
@@ -11,7 +14,7 @@ const GridView = () => {
   useEffect(() => {
     const fetchCruds = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/cruds");
+        const response = await axios.get(`${backendApi}/cruds`);
         setCruds(response.data);
       } catch (error) {
         console.error("Error fetching cruds: ", error.message);
@@ -23,11 +26,12 @@ const GridView = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/cruds/${id}`);
+      await axios.delete(`${backendApi}/cruds/${id}`);
       setCruds(cruds.filter((crud) => crud._id !== id));
-      alert("Crud deleted!");
+      toast.success("Crud deleted!");
     } catch (error) {
       console.error("Error deleting Crud: ", error.message);
+      toast.error("Error deleting Crud");
     }
   };
 
@@ -68,6 +72,7 @@ const GridView = () => {
           ))}
         </tbody>
       </table>
+      <ToastContainer position="top-right" />
     </div>
   );
 };

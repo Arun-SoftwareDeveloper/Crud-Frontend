@@ -1,37 +1,31 @@
-/* Create.css */
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 5rem;
+/* Style for the ToastContainer */
+.Toastify__toast-container {
+  z-index: 9999;
 }
 
-.heading {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+/* Style for the Toast message */
+.Toastify__toast {
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  border-radius: 4px;
 }
 
-.input-container {
-  width: 100%;
-  margin-bottom: 1.5rem;
+/* Success Toast */
+.Toastify__toast--success {
+  background-color: #28a745;
 }
 
-.label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+/* Error Toast */
+.Toastify__toast--error {
+  background-color: #dc3545;
 }
 
-.input {
-  font-size: 1rem;
-  padding: 0.75rem;
-  width: 100%;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+/* Info Toast */
+.Toastify__toast--info {
+  background-color: #17a2b8;
 }
 
-.submit-button {
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  margin-top: 1rem;
+/* Warning Toast */
+.Toastify__toast--warning {
+  background-color: #ffc107;
 }

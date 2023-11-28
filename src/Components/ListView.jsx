@@ -2,15 +2,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import backendApi from "../backendAPi";
+import "../Styles/ListView.css";
 const ListView = () => {
   const [cruds, setCruds] = useState([]);
 
   useEffect(() => {
     const fetchCruds = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/cruds");
+        const response = await axios.get(`${backendApi}/cruds`);
         setCruds(response.data);
       } catch (error) {
         console.error("Error fetching cruds: ", error.message);
@@ -22,11 +25,12 @@ const ListView = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/cruds/${id}`);
+      await axios.delete(`${backendApi}/cruds/${id}`);
       setCruds(cruds.filter((crud) => crud._id !== id));
-      alert("Crud deleted!");
+      toast.success("Crud deleted!");
     } catch (error) {
       console.error("Error deleting Crud: ", error.message);
+      toast.error("Error deleting Crud");
     }
   };
 
@@ -58,6 +62,7 @@ const ListView = () => {
           </li>
         ))}
       </ul>
+      <ToastContainer />
     </div>
   );
 };
